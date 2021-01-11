@@ -1,0 +1,147 @@
+<html>
+    <head>
+        <title>사지방 연등인원 추첨기</title>
+        <style>
+            body {
+                background: #9DC8C8;
+            }
+
+            form {
+                margin: 20px;
+                display: inline-block;
+            }
+
+            h3 {
+                position: absolute;
+                bottom: 5%;
+                right: 5%;
+                color:darkslategray;
+                font-style: italic;
+                font-weight: bolder;
+            }
+
+            #div-site-name {
+                position: absolute;
+                width: 60%;
+                height: 10%;
+                top: 5%;
+                left: 50%;
+                transform: translateX(-50%);
+
+                border-radius: 20px;
+                background: #58C9B9;
+
+                text-align: center;
+                color:darkslategray;
+                font-style: italic;
+                font-weight: bolder;
+            }
+
+            #div-left-side {
+                position: absolute;
+                width: 40%;
+                height: 60%;
+
+                left:5%;
+                top: 20%;
+
+                border-radius: 20px;
+                background: #58C9B9;
+
+                text-align: center;
+                margin: auto;
+            }
+
+            #div-right-side {
+                position: absolute;
+                width: 40%;
+                height: 60%;
+
+                right:5%;
+                top: 20%;
+
+                border-radius: 20px;
+                background: #58C9B9;
+
+                text-align: center;
+                margin: auto;
+            }
+
+            #btn-result {
+                position: absolute;
+                z-index: 1;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .entered-name {
+                color:darkslategray;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div-site-name">
+            <h1 id="text-site-name">사지방 연등인원 추첨기</h1>
+        </div>
+        <div id="div-left-side">
+            <form id="form" action>
+                <input id="input-text" type="text">
+                <button id="btn-add-man">추가</button>
+            </form>
+        </div>
+        <div id="div-right-side">
+
+        </div>
+        <button id="btn-result">추첨</button>
+        <h3>제작: HQ 상병 김준엽</h3>
+
+        <script type="text/javascript">
+
+            function shuffle(a) {
+                var j, x, i;
+                for (i = a.length; i; i -= 1) {
+                    j = Math.floor(Math.random() * i);
+                    x = a[i - 1];
+                    a[i - 1] = a[j];
+                    a[j] = x;
+                }
+            }
+
+            let array = [];
+
+            let left_side = document.getElementById('div-left-side');
+            let right_side = document.getElementById('div-right-side');
+            let btn_add = document.getElementById('btn-add-man');
+            let input_text = document.getElementById('input-text');
+
+            btn_add.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                array.push(input_text.value);
+
+                let new_man = document.createTextNode(input_text.value);
+                let br = document.createElement('br');
+                left_side.appendChild(br);
+                left_side.appendChild(new_man);
+                input_text.value = null;
+            })
+
+            btn_result = document.getElementById('btn-result');
+            btn_result.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                shuffle(array);
+
+                for(let i = 0; i < 8; i++) {
+                    let picked_man = array[i];
+
+                    let new_man = document.createTextNode(picked_man);
+                    let br = document.createElement('br');
+                    right_side.appendChild(br);
+                    right_side.appendChild(new_man);
+                }
+            })
+        </script>
+    </body>
+</html>
